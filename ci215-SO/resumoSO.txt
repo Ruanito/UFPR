@@ -99,3 +99,70 @@ foi alocado
                 2. Quando a tarefa atribuída não é mais requerida
                 3. Quando um processo pai é terminado, o sistema operacional não
 permite que o processo filho continue sem um processo pai
+
+    CPU Scheduling
+        Basic Concepts - Um processador con um core consegue rodar processo por
+vez. Objetivo em um mult core é rodar vários processos por vez para não deixar a
+CPU esperando.
+        CPU Scheduler - O sitema operacional tem que selecionar um processo da
+ready queue para executar e alocar a CPU para aquele processo. A ready queue não
+precisa ser um FIFO, existe vários algoritimos para scheduling.
+        Preemptive Scheduling - O CPU-scheduling deve tomar uma decisão para
+essas quatros circunstâncias
+            1. Quando o processo troca de running para waiting
+            2. Quando o processo troca de running para ready
+            3. Quando o processo troca de waiting para ready
+            4. Quando o processo termina
+            Na circustância 1 e 4, diz que o scheduling é não preventivo ou
+coperativo, em outro caso diz que é preventivo. Infelizmente, um scheduling
+preventivo custa associação com acesso de memória compartilhada.
+        Dispatcher - Um componente na CPU-scheduling é a função dispatcher. Essa
+funcão envolve os seguinter.
+            1. Troca de contesto
+            2. Troca de modo de usúario
+            3. Pulapara uma localização em um programa do usúario para restart
+do programa
+        Scheduling Criteria -
+            CPU utilization. Manter sempre alta a utilização da CPU
+            Throughput. O total de processos executados em um tempo é chamada
+Throughput(vazão)
+            Turnourand time. Ponte de vista para quanto tempo leva para executar
+um processo. É considerado o tempo que leva para completar de executar se chama
+tempo total
+            Waiting time. O algoritimo CPU-scheduling não afeta o tempo total do
+processa, só afeta o tempo de espera no ready queue. Waiting time é a soma dos
+periodos gasto na ready queue
+            Response time. É o tempo que começa a responder.
+            É desejavel maximilizar a utilização da CPU e vazão e minimizar o
+uso do tempo total, tempo de espera e tempo de resposta.
+
+    Scheduling algorithms
+        First come, first-served Sheduling - É uma fila simples, o primeiro da
+ready queue é colocado na CPU, quando o processo termina novamene pega o
+primeiro da ready queue.
+        Shortest-job-first scheduling - O algoritimo coloca na frente os
+processos que tem o menor tamanho de execução. Ele simplesmente move os
+processos com menor tamanho de execução na frente dos com maiores tempo de
+execução. É provavelmente um algoritimo otimizado.
+        Priority Scheduling - Cada processo ganha um priorida, se um processo
+tem prioridade maior que outro ele entra na frente, caso seja a mesma usa um
+FIFO. Priorida pode ser definido internamente ou externamente. Internamente pelo
+uso de memória, tempo limite, I/O, etc, externamente pela importancia do
+processo e etc. O grande problema desse algoritimo é indefinite block ou
+starvation. O processo está ready mais a CPU pode considerar bloqueado e tambem
+pode deixar alguns processos de baixa prioridade esperando infinitamente. A
+solução para starvation se chama aging. É uma tequinica que gradativamente vai
+almentando a prioridade do processo.
+        Round-Robin Scheduling - É similar ao FIFO scheduling, esse algoritimo é
+divido em intervalos de tempo chamado quantum. Um quantum é geralmente de 10 a
+100 milisgundos de tamanho. Ele pega o primeiro processo do ready queue e
+executa, caso o processo termine antes de um quantum, é colocado um novo
+processo na CPU, caso contrario o processo retorna para o final a queue e espera
+para ser executado denovo até terminar a execução.
+        Mutilevel Queue Scheduling - É particionar a ready queue em separetes
+queue, geralmente baseado em alguma propriedade do processo. Um exemplo de
+multilevel queue, listado em ordem de prioridade.
+            1. Processos do sitemas
+            2. Processos interativos
+            3. Processos interativos de edição
+            4. Processos de estudantes
