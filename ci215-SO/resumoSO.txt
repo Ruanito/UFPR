@@ -166,3 +166,48 @@ multilevel queue, listado em ordem de prioridade.
             2. Processos interativos
             3. Processos interativos de edição
             4. Processos de estudantes
+
+    Deadlock
+        System model - Um modo normal de operação, um processo pode usar um
+recurso da seguinte forma.
+            1. Request - Um processo faz um request de um recurso. Se a
+requisição não pode ser atendida ele fica esperando até ter o recurso
+disponivel.
+            2. Use - O processo consegue usar o recurso
+            3. Release - O processo libera o recurso.
+        Necessary Conditions - Um deadlock pode entrar se uma das quatro
+condições simutaneamente segurarem o sistema.
+            1. Mutual exclusion - Pelo menos um recurso deve ser segurado em
+modo não compartilhado.
+            2. Hold and wait - Um processo está segurando pelo menos um recurso
+e esperando adiquirir mais um recurso que está concorrendo com outro processo.
+            3. No preemption - Recursos não são preventivos, o recurso só pode
+ser liberado pelo processo que está segurando, quando ele termina a atividade.
+            4. Circular wait - Quando existe um espera circular (minha melhor
+explicação =D).
+        Methods for Handing Deadlocks - Geralmente se trabalha com deadlock com
+esses três caminhos.
+            1. Pode usar um protocolo que preve ou evita deadlocks, tendo
+certeza que o sistema numca emtra em deadlock.
+            2. Pode permitir que quando o sitema entrar em deadlock, ele detecte
+e recupere-se.
+            3. Ou ignora o problema e funcione como que o sistema nunca entre em
+deadlock.
+        Deadlock Prevention -
+            Mutual Exclusion - Mutual exclução só entra quando o recurso é não
+compartilhado, para recurso compartilhados é impossível de entrar em mutual
+exclução.
+            Hold and wait - Para ter certeze que nunca entre em segura e espara
+é usando um protocolo que o processo pessa todos os recursos quando for
+iniciado ou  nunca segurar um recurso quando pedir outro. Os dois tem grandes
+problemas, o primeiro pode ficar com recursos sem utilizar por muito tempo e o
+segundo é possível que entre em starvation.
+            No Preemption - Quando um processo requisitar um recurso e ele não
+pode ser atendido imetitamente, ele libera todos os recursos que ele estava
+segurando.
+            Circular wait - Se colocar um valor inteiro para cada recurso e
+nenhum número repetido, quando um processo faz o pedido de um recurso Ri e
+depois um pedido de recurso Rj, ele só pode ser atendido se Ri < Rj.
+        Deadlock avoidance
+            Safe State - É quando todos o sistema pode alocar os recurso para
+todos os processo em alguma ordem e continuar evitando deadlock.
