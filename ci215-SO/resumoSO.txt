@@ -211,3 +211,40 @@ depois um pedido de recurso Rj, ele só pode ser atendido se Ri < Rj.
         Deadlock avoidance
             Safe State - É quando todos o sistema pode alocar os recurso para
 todos os processo em alguma ordem e continuar evitando deadlock.
+
+    Semaphores -
+        wait(S) {
+            while S <= 0;
+            S--;
+        }
+        signal(S) {
+            S++;
+        }
+
+    Virtual Memory
+        Demand Paging - Uma pagina só será carrega em memória quando
+precisarem dela, caso contrario nunca será carregada.
+        Copy-on-Write - Quando é execudado o comando fork(), tamto o processo
+pai e filho compartilham as mesmas paginas, sem haver copias de paginas
+identicas na memória, caso o processo filho tenha que mudar umas das página, é
+feita um copia só dessa pagina, e as outras continua sendo compartilhadas.
+        Page Replacement -
+            Basic Page Replecement -
+                1. Procere a localização da pagina em disco
+                2. Ache um frame livre
+                    a. Se o freme estiver livre, use
+                    b. Se o frame não estiver livre, use um algoritimo de
+substituição de paginas e selecione a vitima
+                    c. Escreva a vitima em disco, troce de pagina e a tabela de
+frames
+                3. Lei a pagina no frame escolhido
+                4. Restart o processo do usúario
+                FIFO Page Replacement - É um simples algoritimo de substituição,
+first-in, first-out.
+                Optimal Page Replacement - É o melhor algortimo para
+substituição de paginas, ele escolhe a página que mais vai demorar para ser
+usaba e a substitui, infelizmente é dificil de implementar, pois você precisa
+saber quais paginas vai usar no futuro.
+                LRU Page Replacement - Esse algoritimo escolhe o frame que a
+mais tempo não é usado e o substitui.
+                Working-Set Model - É baseado no presuposto de localidade D = Ewss
