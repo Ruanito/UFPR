@@ -1,12 +1,20 @@
 package br.ufpr.inf.rds11.ci306_final;
 
+import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class Main extends ActionBarActivity {
+
+    private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+    private static final int REQUEST_ENABLE = 0x1;
+    private static final int REQUEST_DISCOVERABLE = 0x2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,5 +42,18 @@ public class Main extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onEnableButtonClicked(View view) {
+        bluetoothAdapter.enable();
+        if (!bluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE);
+        }
+
+    }
+
+    public void onDisableButtonClicked(View view) {
+        bluetoothAdapter.disable();
     }
 }
