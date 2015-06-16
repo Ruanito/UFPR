@@ -3,4 +3,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="openBluetooth">Ativar Bluetooth</string>
+    <string name="closeBluetooth">Desativar Bluetooth</string>
+    <string name="asClient">Cliente</string>
+    <string name="asServer">Servidor</string>
+    <string name="searchDevice">Procurar por aparelho</string>
 </resources>
