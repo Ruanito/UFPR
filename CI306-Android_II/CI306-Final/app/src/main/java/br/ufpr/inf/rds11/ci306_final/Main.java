@@ -56,4 +56,9 @@ public class Main extends ActionBarActivity {
     public void onDisableButtonClicked(View view) {
         bluetoothAdapter.disable();
     }
+
+    public void onStartDiscoveryButtonClicked(View view) {
+        Intent enabler = new Intent(this, ServerSocketActivity.class);
+        startActivity(enabler);
+    }
 }
