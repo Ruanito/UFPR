@@ -24,6 +24,10 @@
             android:name=".ServerSocketActivity"
             android:label="@string/title_activity_server_socket" >
         </activity>
+        <activity
+            android:name=".ListBluetooth"
+            android:label="@string/title_activity_list_bluettoth" >
+        </activity>
     </application>
 
 </manifest>

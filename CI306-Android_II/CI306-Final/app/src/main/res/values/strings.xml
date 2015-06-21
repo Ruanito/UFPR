@@ -3,11 +3,12 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="openBluetooth">Ativar Bluetooth</string>
+    <string name="openBluetooth">Ativar/Desativar Bluetooth</string>
     <string name="closeBluetooth">Desativar Bluetooth</string>
     <string name="asClient">Cliente</string>
     <string name="asServer">Servidor</string>
     <string name="searchDevice">Procurar por aparelho</string>
     <string name="title_activity_server_socket">ServerSocketActivity</string>
     <string name="stopserver">Parar S.ervidor</string>
+    <string name="title_activity_list_bluettoth">ListBluettoth</string>
 </resources>

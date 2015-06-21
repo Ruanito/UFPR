@@ -8,18 +8,6 @@
         android:onClick="onEnableButtonClicked" />
 
     <Button android:layout_width="fill_parent"
-        android:layout_height="wrap_content" android:text="@string/closeBluetooth"
-        android:onClick="onDisableButtonClicked" />
-
-    <Button android:layout_width="fill_parent"
-        android:layout_height="wrap_content" android:text="@string/asClient"
-        android:onClick="onOpenClientSocketButtonClicked" />
-
-    <Button android:layout_width="fill_parent"
-        android:layout_height="wrap_content" android:text="@string/asServer"
-        android:onClick="onOpenServerSocketButtonClicked" />
-
-    <Button android:layout_width="fill_parent"
         android:layout_height="wrap_content" android:text="@string/searchDevice"
         android:onClick="onStartDiscoveryButtonClicked" />
 

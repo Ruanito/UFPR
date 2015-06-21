@@ -58,7 +58,7 @@ public class Main extends ActionBarActivity {
     }
 
     public void onStartDiscoveryButtonClicked(View view) {
-        Intent enabler = new Intent(this, ServerSocketActivity.class);
-        startActivity(enabler);
+        Intent intent = new Intent(this, ListBluetooth.class);
+        startActivity(intent);
     }
 }
