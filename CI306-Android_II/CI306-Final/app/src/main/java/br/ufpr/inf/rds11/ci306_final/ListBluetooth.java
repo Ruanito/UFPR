@@ -10,8 +10,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.Set;
 
 
 public class ListBluetooth extends ActionBarActivity {
@@ -19,24 +22,17 @@ public class ListBluetooth extends ActionBarActivity {
     private ArrayAdapter<String> mArrayList;
     private ListView listView;
     private BluetoothAdapter bluetoothAdapter;
+    private Set<BluetoothDevice> pairedDevices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bluetooth);
 
-        listView = (ListView)findViewById(R.id.list_item);
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        listView = (ListView) findViewById(R.id.android_list);
+
         mArrayList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-
-        IntentFilter filter = new IntentFilter();
-
-        filter.addAction(BluetoothDevice.ACTION_FOUND);
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-
-        registerReceiver(mReceiver, filter);
-        bluetoothAdapter.startDiscovery();
+        listView.setAdapter(mArrayList);
     }
 
     @Override
@@ -63,20 +59,31 @@ public class ListBluetooth extends ActionBarActivity {
 
     @Override
     public void onDestroy() {
-        unregisterReceiver(mReceiver);
 
         super.onDestroy();
+        unregisterReceiver(bReceiver);
     }
 
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    public void list(View view) {
+        mArrayList.clear();
+        bluetoothAdapter.startDiscovery();
+
+        registerReceiver(bReceiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
+    }
+
+
+    public void onStartListButtonClicked(View view) {
+        list(view);
+    }
+
+    final BroadcastReceiver bReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                mArrayList.add("Iniciando busca\n");
                 mArrayList.add(device.getName() + "\n" + device.getAddress());
-                listView.setAdapter(mArrayList);
+                mArrayList.notifyDataSetChanged();
             }
         }
     };

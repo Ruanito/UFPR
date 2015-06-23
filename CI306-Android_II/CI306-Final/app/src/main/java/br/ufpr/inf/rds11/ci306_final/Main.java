@@ -1,20 +1,34 @@
 package br.ufpr.inf.rds11.ci306_final;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.UUID;
+
 
 public class Main extends ActionBarActivity {
 
+    private static final String TAG = "Jon";
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    private BluetoothSocket btSocket = null;
+    private OutputStream outStream = null;
+    private InputStream inStream = null;
 
     private static final int REQUEST_ENABLE = 0x1;
     private static final int REQUEST_DISCOVERABLE = 0x2;
+    private static String address = "20:13:01:24:00:76";
+    private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,16 +63,26 @@ public class Main extends ActionBarActivity {
         if (!bluetoothAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE);
+        } else {
+            bluetoothAdapter.disable();
         }
 
     }
 
-    public void onDisableButtonClicked(View view) {
-        bluetoothAdapter.disable();
-    }
-
     public void onStartDiscoveryButtonClicked(View view) {
-        Intent intent = new Intent(this, ListBluetooth.class);
-        startActivity(intent);
+        BluetoothDevice device = bluetoothAdapter.getRemoteDevice(address);
+
+        try {
+            btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
+            btSocket.connect();
+
+        } catch (IOException e) {
+            try {
+                btSocket.close();
+            } catch (IOException e2) {
+                Log.d(TAG, "Unable to end the connect");
+            }
+            Log.d(TAG, "Socket creating failed");
+        }
     }
 }
