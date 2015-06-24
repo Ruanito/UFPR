@@ -11,4 +11,14 @@
         android:layout_height="wrap_content" android:text="@string/searchDevice"
         android:onClick="onStartDiscoveryButtonClicked" />
 
+    <Button android:layout_width="fill_parent"
+        android:layout_height="wrap_content" android:text="Enviar dados"
+        android:onClick="onSendDataButtonClicked" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+
 </LinearLayout>
