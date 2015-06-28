@@ -33,13 +33,12 @@
             android:label="@string/title_activity_bluetooth_chat" >
         </activity>
         <activity
+            android:name=".ManualControl"
+            android:label="@string/title_activity_manual_control" >
+        </activity>
+        <activity
             android:name=".BlueArduino"
             android:label="@string/title_activity_blue_arduino" >
-
-        </activity>
-        <activity android:name=".ManualControl"
-            android:label="@string/title_activity_manual_contro" >
-
         </activity>
     </application>
 
