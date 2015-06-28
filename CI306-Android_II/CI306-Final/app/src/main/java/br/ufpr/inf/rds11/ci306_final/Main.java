@@ -75,6 +75,11 @@ public class Main extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public  void onLabirintoButtonClicked(View view) {
+        Intent intent = new Intent(this, Labirinto.class);
+        startActivity(intent);
+    }
+    
     public  void onManualControlButtonClicked(View view) {
         Intent intent = new Intent(this, ManualControl.class);
         startActivity(intent);
