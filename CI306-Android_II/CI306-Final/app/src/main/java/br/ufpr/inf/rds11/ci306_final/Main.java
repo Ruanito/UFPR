@@ -79,7 +79,7 @@ public class Main extends ActionBarActivity {
         Intent intent = new Intent(this, Labirinto.class);
         startActivity(intent);
     }
-    
+
     public  void onManualControlButtonClicked(View view) {
         Intent intent = new Intent(this, ManualControl.class);
         startActivity(intent);
