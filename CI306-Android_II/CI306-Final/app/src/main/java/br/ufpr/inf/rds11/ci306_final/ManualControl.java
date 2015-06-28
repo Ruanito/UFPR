@@ -26,28 +26,20 @@ public class ManualControl extends ActionBarActivity {
     public void onDownButtonClicked(View view) {
         String message = "2";
         mBlue.SendMessage(message);
-        message = "0";
-        mBlue.SendMessage(message);
     }
 
     public void onUpButtonClicked(View view) {
         String message = "8";
-        mBlue.SendMessage(message);
-        message = "0";
         mBlue.SendMessage(message);
     }
 
     public void onRotLeftButtonClicked(View view) {
         String message = "E";
         mBlue.SendMessage(message);
-        message = "0";
-        mBlue.SendMessage(message);
     }
 
     public void onRotRightButtonClicked(View view) {
         String message = "F";
-        mBlue.SendMessage(message);
-        message = "0";
         mBlue.SendMessage(message);
     }
 }
