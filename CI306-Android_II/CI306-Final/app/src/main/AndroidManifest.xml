@@ -28,6 +28,10 @@
             android:name=".ListBluetooth"
             android:label="@string/title_activity_list_bluettoth" >
         </activity>
+        <activity
+            android:name=".BluetoothChatActivity"
+            android:label="@string/title_activity_bluetooth_chat" >
+        </activity>
     </application>
 
 </manifest>

@@ -102,10 +102,24 @@ public class Main extends ActionBarActivity {
         }
     }
 
+    public void onListButtonClicked(View view) {
+        Intent intent = new Intent(this, BluetoothChatActivity.class);
+        startActivity(intent);
+    }
+
     public void onSendDataButtonClicked(View view) {
         dataToSend = "5";
         writeData(dataToSend);
+        Context context = getApplicationContext();
+        CharSequence text = "Esperando receber!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
         beginListenForData();
+        text = "A espera de um milagre!";
+        toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
 
@@ -153,7 +167,7 @@ public class Main extends ActionBarActivity {
                                 {
                                     byte[] encodedBytes = new byte[readBufferPosition];
                                     System.arraycopy(readBuffer, 0, encodedBytes, 0, encodedBytes.length);
-                                    final String data = new String(encodedBytes, "UTF-8");
+                                    final String data = new String(encodedBytes);
                                     readBufferPosition = 0;
                                     handler.post(new Runnable()
                                     {

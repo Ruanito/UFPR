@@ -15,6 +15,10 @@
         android:layout_height="wrap_content" android:text="Enviar dados"
         android:onClick="onSendDataButtonClicked" />
 
+    <Button android:layout_width="fill_parent"
+        android:layout_height="wrap_content" android:text="Lista"
+        android:onClick="onListButtonClicked" />
+
     <TextView
         android:id="@+id/result"
         android:layout_width="fill_parent"
