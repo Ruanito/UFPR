@@ -6,11 +6,11 @@
     <ImageButton
         android:layout_width="300px"
         android:layout_height="200px"
+        android:scaleType="fitXY"
         android:id="@+id/buttonUp"
         android:src="@drawable/up"
-        android:scaleType="fitXY"
         android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/buttonRotRight" />
+        android:layout_centerHorizontal="true" />
     <ImageButton
         android:layout_width="250px"
         android:layout_height="250px"
@@ -18,24 +18,26 @@
         android:src="@drawable/rot_left"
         android:scaleType="fitXY"
         android:layout_below="@+id/buttonUp"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="40px"
+        />
     <ImageButton
         android:layout_width="250px"
         android:layout_height="250px"
+        android:scaleType="fitXY"
         android:id="@+id/buttonRotRight"
         android:src="@drawable/rot_right"
-        android:scaleType="fitXY"
-        android:layout_alignTop="@+id/buttonRotLeft"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/buttonUp"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="40px"
+        />
     <ImageButton
         android:layout_width="300px"
         android:layout_height="200px"
+        android:scaleType="fitXY"
         android:id="@+id/buttonDown"
         android:src="@drawable/down"
-        android:scaleType="fitXY"
         android:layout_below="@+id/buttonRotLeft"
-        android:layout_toEndOf="@+id/buttonRotLeft"
-        android:layout_marginTop="44dp" />
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
