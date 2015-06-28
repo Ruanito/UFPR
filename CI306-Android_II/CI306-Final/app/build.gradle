@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "br.ufpr.inf.rds11.ci306_final"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
