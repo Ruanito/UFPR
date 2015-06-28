@@ -1,19 +1,27 @@
 package br.ufpr.inf.rds11.ci306_final;
 
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 
 public class BlueArduino extends ActionBarActivity {
+
+    private BluetoothArduino mBlue = null;
+    private EditText newMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blue_arduino);
 
-        BluetoothArduino mBlue = BluetoothArduino.getInstance("linvor");
+        mBlue = BluetoothArduino.getInstance("linvor");
+        newMessage = (EditText) findViewById(R.id.newMessage);
 
         mBlue.Connect();
     }
@@ -38,5 +46,10 @@ public class BlueArduino extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onSendMessageButtonClicked(View view) {
+        String message = newMessage.getText().toString();
+        mBlue.SendMessage(message);
     }
 }
