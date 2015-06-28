@@ -179,9 +179,10 @@ public class BluetoothArduino extends Thread {
     }
 
     public void SendMessage(String msg){
+        byte[] msgBuffer = msg.getBytes();
         try {
             if(connected) {
-                mOut.write(msg.getBytes());
+                mOut.write(msgBuffer);
             }
 
         } catch (IOException e){
