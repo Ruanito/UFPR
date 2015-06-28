@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark">
 
     <ImageButton
         android:layout_width="300px"
@@ -10,7 +11,9 @@
         android:id="@+id/buttonUp"
         android:src="@drawable/up"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="false"
+        android:background="@android:color/background_dark" />
     <ImageButton
         android:layout_width="250px"
         android:layout_height="250px"
@@ -20,7 +23,7 @@
         android:layout_below="@+id/buttonUp"
         android:layout_alignParentLeft="true"
         android:layout_marginRight="40px"
-        />
+        android:background="@android:color/background_dark" />
     <ImageButton
         android:layout_width="250px"
         android:layout_height="250px"
@@ -30,7 +33,7 @@
         android:layout_below="@+id/buttonUp"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="40px"
-        />
+        android:background="@android:color/background_dark" />
     <ImageButton
         android:layout_width="300px"
         android:layout_height="200px"
@@ -38,6 +41,7 @@
         android:id="@+id/buttonDown"
         android:src="@drawable/down"
         android:layout_below="@+id/buttonRotLeft"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/background_dark" />
 
 </RelativeLayout>
