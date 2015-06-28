@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:adjustViewBounds="false"
         android:background="@android:color/background_dark"
-        android:layout_marginTop="250px"/>
+        android:layout_marginTop="250px" />
     <ImageButton
         android:layout_width="250px"
         android:layout_height="250px"
