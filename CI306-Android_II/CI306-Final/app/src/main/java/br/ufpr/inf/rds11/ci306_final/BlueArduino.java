@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
@@ -49,7 +48,7 @@ public class BlueArduino extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onSendMessageButtonClicked(View view, MotionEvent event) {
+    public void onSendMessageButtonClicked(View view) {
         String message = newMessage.getText().toString();
         mBlue.SendMessage(message);
         mBlue.getLastMessage();

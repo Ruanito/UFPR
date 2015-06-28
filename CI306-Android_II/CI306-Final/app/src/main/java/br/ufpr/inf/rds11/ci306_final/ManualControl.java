@@ -12,10 +12,6 @@ import android.widget.ImageButton;
 public class ManualControl extends ActionBarActivity {
 
     private BluetoothArduino mBlue = null;
-    private ImageButton buttonUp = null;
-    private ImageButton buttonRotLeft = null;
-    private ImageButton buttonRotRight = null;
-    private ImageButton buttonDown = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,37 +21,33 @@ public class ManualControl extends ActionBarActivity {
         mBlue = BluetoothArduino.getInstance("linvor");
 
         mBlue.Connect();
-
-        buttonUp = (ImageButton) findViewById(R.id.buttonUp);
-        buttonRotLeft = (ImageButton) findViewById(R.id.buttonRotLeft);
-        buttonRotRight = (ImageButton) findViewById(R.id.buttonRotRight);
-        buttonDown = (ImageButton) findViewById(R.id.buttonDown);
-
-        buttonUp.setOnLongClickListener(onLongClickListener);
-        buttonRotLeft.setOnLongClickListener(onLongClickListener);
-        buttonRotRight.setOnLongClickListener(onLongClickListener);
-        buttonDown.setOnLongClickListener(onLongClickListener);
-
     }
 
-    private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
-        @Override
-        public boolean onLongClick(View v) {
-            switch (v.getId()){
-                case R.id.buttonUp:
-                    mBlue.SendMessage("5");
-                    break;
-                case R.id.buttonRotLeft:
-                    mBlue.SendMessage("E");
-                    break;
-                case R.id.buttonRotRight:
-                    mBlue.SendMessage("F");
-                    break;
-                case R.id.buttonDown:
-                    mBlue.SendMessage("2");
-                    break;
-            }
-            return false;
-        }
-    };
+    public void onDownButtonClicked(View view) {
+        String message = "2";
+        mBlue.SendMessage(message);
+        message = "0";
+        mBlue.SendMessage(message);
+    }
+
+    public void onUpButtonClicked(View view) {
+        String message = "8";
+        mBlue.SendMessage(message);
+        message = "0";
+        mBlue.SendMessage(message);
+    }
+
+    public void onRotLeftButtonClicked(View view) {
+        String message = "E";
+        mBlue.SendMessage(message);
+        message = "0";
+        mBlue.SendMessage(message);
+    }
+
+    public void onRotRightButtonClicked(View view) {
+        String message = "F";
+        mBlue.SendMessage(message);
+        message = "0";
+        mBlue.SendMessage(message);
+    }
 }
