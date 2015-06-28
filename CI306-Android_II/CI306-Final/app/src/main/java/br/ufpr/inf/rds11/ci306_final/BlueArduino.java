@@ -50,7 +50,7 @@ public class BlueArduino extends ActionBarActivity {
 
     public void onSendMessageButtonClicked(View view) {
         String message = newMessage.getText().toString();
-        newMessage.setText("teste");
         mBlue.SendMessage(message);
+        newMessage.setText(mBlue.getLastMessage());
     }
 }
