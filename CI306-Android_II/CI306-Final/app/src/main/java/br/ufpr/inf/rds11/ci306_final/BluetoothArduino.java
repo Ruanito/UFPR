@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.UUID;
 
 public class BluetoothArduino extends Thread {
+    private static String address = "20:13:01:24:00:76";
     private BluetoothAdapter mBlueAdapter = null;
     private BluetoothSocket mBlueSocket = null;
     private BluetoothDevice mBlueRobo = null;
@@ -92,6 +93,7 @@ public class BluetoothArduino extends Thread {
             LogMessage("\t\tConncting to the robot...");
 
             UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
+            BluetoothDevice device = mBlueAdapter.getRemoteDevice(address);
             mBlueSocket = mBlueRobo.createRfcommSocketToServiceRecord(uuid);
             mBlueSocket.connect();
             mOut = mBlueSocket.getOutputStream();
