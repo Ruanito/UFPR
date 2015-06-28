@@ -92,6 +92,7 @@ public class Main extends ActionBarActivity {
     }
 
     public void onStartDiscoveryButtonClicked(View view) {
+        /*
         BluetoothDevice device = bluetoothAdapter.getRemoteDevice(address);
 
         try {
@@ -106,6 +107,7 @@ public class Main extends ActionBarActivity {
             }
             Log.d(TAG, "Socket creating failed");
         }
+        */
     }
 
     public void onListButtonClicked(View view) {
