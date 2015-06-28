@@ -12,6 +12,7 @@
     <string name="stopserver">Parar S.ervidor</string>
     <string name="title_activity_list_bluettoth">ListBluettoth</string>
     <string name="title_activity_bluetooth_chat">BluetoothChatActivity</string>
+    <string name="title_activity_manual_control">ManualControl</string>
     <string name="acao_iniciar_servidor">Iniciar servidor</string>
     <string name="acao_iniciar_cliente">Iniciar cliente</string>
     <string name="msg_erro_bt_indisponivel">Aparelho não suporta Bluetooth</string>

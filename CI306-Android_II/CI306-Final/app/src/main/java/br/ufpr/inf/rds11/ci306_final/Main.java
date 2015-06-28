@@ -75,6 +75,11 @@ public class Main extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public  void onManualControlButtonClicked(View view) {
+        Intent intent = new Intent(this, ManualControl.class);
+        startActivity(intent);
+    }
+
     public void onEnableButtonClicked(View view) {
         bluetoothAdapter.enable();
         if (!bluetoothAdapter.isEnabled()) {
