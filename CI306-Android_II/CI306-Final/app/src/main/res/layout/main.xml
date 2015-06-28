@@ -34,5 +34,12 @@
         android:text="Controle Manual"
         android:onClick="onManualControlButtonClicked" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Labirinto"
+        android:onClick="onLabirintoButtonClicked"
+        android:layout_gravity="center_horizontal" />
+
 
 </LinearLayout>

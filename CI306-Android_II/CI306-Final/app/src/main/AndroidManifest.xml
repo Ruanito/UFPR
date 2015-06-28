@@ -40,6 +40,10 @@
             android:name=".BlueArduino"
             android:label="@string/title_activity_blue_arduino" >
         </activity>
+        <activity
+            android:name=".Labirinto"
+            android:label="@string/title_activity_labirinto" >
+        </activity>
     </application>
 
 </manifest>

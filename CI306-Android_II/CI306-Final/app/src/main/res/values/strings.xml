@@ -24,4 +24,5 @@
     <string name="mensagem_servidor">Aguardando por conexões...</string>
     <string name="msg_desconectou">Desconectou</string>
     <string name="title_activity_blue_arduino">BlueArduino</string>
+    <string name="title_activity_labirinto">Labirinto</string>
 </resources>
