@@ -110,7 +110,7 @@ public class BluetoothChatActivity extends ActionBarActivity
                 mAdaptadorBluetooth.startDiscovery();
                 exibirProgressDialog(R.string.msg_procurando_dispositivos, 0);
                 break;
-
+            /*
             case R.id.action_servidor:
                 Intent discoverableIntent = new Intent(
                         BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
@@ -119,6 +119,7 @@ public class BluetoothChatActivity extends ActionBarActivity
                         BT_TEMPO_DESCOBERTA);
                 startActivityForResult(discoverableIntent, BT_VISIVEL);
                 break;
+            */
         }
         return super.onOptionsItemSelected(item);
     }
@@ -300,7 +301,7 @@ public class BluetoothChatActivity extends ActionBarActivity
             try {
                 nome = socket.getRemoteDevice().getName();
                 is = new DataInputStream(socket.getInputStream());
-                os =new DataOutputStream(socket.getOutputStream());
+                os = new DataOutputStream(socket.getOutputStream());
                 String string;
                 while (true) {
                     string = is.readUTF();

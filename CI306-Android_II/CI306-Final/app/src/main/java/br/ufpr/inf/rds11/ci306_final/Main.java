@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -107,19 +108,18 @@ public class Main extends ActionBarActivity {
         startActivity(intent);
     }
 
+    public void onLinvorButtonClicked(View view) {
+        Intent intent = new Intent(this, BlueArduino.class);
+        startActivity(intent);
+    }
+
     public void onSendDataButtonClicked(View view) {
         dataToSend = "5";
         writeData(dataToSend);
         Context context = getApplicationContext();
         CharSequence text = "Esperando receber!";
         int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
         beginListenForData();
-        text = "A espera de um milagre!";
-        toast = Toast.makeText(context, text, duration);
-        toast.show();
     }
 
 
