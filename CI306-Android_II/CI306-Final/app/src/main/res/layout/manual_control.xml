@@ -28,54 +28,54 @@
         android:layout_marginRight="40px"
         android:background="@android:color/background_dark"
         android:layout_marginLeft="200px"
-        android:layout_marginTop="200px"
-        android:onClick="onRotLeftButtonClicked"/>
-    <ImageButton
-        android:layout_width="250px"
-        android:layout_height="250px"
-        android:scaleType="fitXY"
-        android:id="@+id/buttonRotRight"
-        android:src="@drawable/rot_right"
-        android:layout_below="@+id/buttonUp"
-        android:layout_alignParentRight="true"
-        android:background="@android:color/background_dark"
-        android:layout_marginRight="200px"
-        android:layout_marginTop="200px"
-        android:onClick="onRotRightButtonClicked"/>
-    <ImageButton
-        android:layout_width="300px"
-        android:layout_height="200px"
-        android:scaleType="fitXY"
-        android:id="@+id/buttonDown"
-        android:src="@drawable/down"
-        android:layout_below="@+id/buttonRotLeft"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/background_dark"
-        android:layout_marginTop="200px"
-        android:onClick="onDownButtonClicked"
-        />
+        android:layout_marginTop="200px"/>
+    <!--android:onClick="onRotLeftButtonClicked"-->
+<ImageButton
+    android:layout_width="250px"
+    android:layout_height="250px"
+    android:scaleType="fitXY"
+    android:id="@+id/buttonRotRight"
+    android:src="@drawable/rot_right"
+    android:layout_below="@+id/buttonUp"
+    android:layout_alignParentRight="true"
+    android:background="@android:color/background_dark"
+    android:layout_marginRight="200px"
+    android:layout_marginTop="200px"/>
+    <!--android:onClick="onRotRightButtonClicked"-->
+<ImageButton
+    android:layout_width="300px"
+    android:layout_height="200px"
+    android:scaleType="fitXY"
+    android:id="@+id/buttonDown"
+    android:src="@drawable/down"
+    android:layout_below="@+id/buttonRotLeft"
+    android:layout_centerHorizontal="true"
+    android:background="@android:color/background_dark"
+    android:layout_marginTop="200px"/>
+    <!--android:onClick="onDownButtonClicked"-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="4444,44  4444,44 4444,44"
-        android:id="@+id/sensorsTextView"
-        android:layout_below="@+id/buttonDown"
-        android:layout_marginTop="68dp"
-        android:background="@android:color/background_dark"
-        android:layout_alignEnd="@+id/buttonRotRight"
-        android:layout_alignStart="@+id/buttonRotLeft"
-        android:textColor="#ff2dc208"
-        android:password="false"
-        android:phoneNumber="false"
-        android:singleLine="false"
-        android:focusable="false"
-        android:enabled="false"
-        android:clickable="false"
-        android:layout_centerHorizontal="true"
-        android:autoText="false"
-        android:elegantTextHeight="false"
-        android:textStyle="bold"
-        android:gravity="center_horizontal" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="4444,44  4444,44 4444,44"
+    android:id="@+id/sensorsTextView"
+    android:layout_below="@+id/buttonDown"
+    android:layout_marginTop="68dp"
+    android:background="@android:color/background_dark"
+    android:layout_alignEnd="@+id/buttonRotRight"
+    android:layout_alignStart="@+id/buttonRotLeft"
+    android:textColor="#ff2dc208"
+    android:password="false"
+    android:phoneNumber="false"
+    android:singleLine="false"
+    android:focusable="false"
+    android:enabled="false"
+    android:clickable="false"
+    android:layout_centerHorizontal="true"
+    android:autoText="false"
+    android:elegantTextHeight="false"
+    android:textStyle="bold"
+    android:gravity="center_horizontal" />
 
 </RelativeLayout>

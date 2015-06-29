@@ -24,8 +24,7 @@ public class ManualControl extends ActionBarActivity {
         mBlue = BluetoothArduino.getInstance("linvor");
         mBlue.Connect();
 
-        Button buttonUp = (Button) findViewById(R.id.buttonUp);
-
+        ImageButton buttonUp = (ImageButton) findViewById(R.id.buttonUp);
         buttonUp.setOnTouchListener(new OnTouchListener() {
 
             @Override
@@ -44,25 +43,66 @@ public class ManualControl extends ActionBarActivity {
             }
 
         });
+
+        ImageButton buttonRotright = (ImageButton) findViewById(R.id.buttonRotRight);
+        buttonRotright.setOnTouchListener(new OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    String message = "F";
+                    mBlue.SendMessage(message);
+
+                }
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    String message = "0";
+                    mBlue.SendMessage(message);
+                }
+                return true;
+            }
+
+        });
+
+        ImageButton buttonRotLeft = (ImageButton) findViewById(R.id.buttonRotLeft);
+        buttonRotLeft.setOnTouchListener(new OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    String message = "E";
+                    mBlue.SendMessage(message);
+
+                }
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    String message = "0";
+                    mBlue.SendMessage(message);
+                }
+                return true;
+            }
+
+        });
+
+        ImageButton buttonDown = (ImageButton) findViewById(R.id.buttonDown);
+        buttonDown.setOnTouchListener(new OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    String message = "2";
+                    mBlue.SendMessage(message);
+
+                }
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    String message = "0";
+                    mBlue.SendMessage(message);
+                }
+                return true;
+            }
+
+        });
     }
 
-    public void onDownButtonClicked(View view) {
-        String message = "2";
-        mBlue.SendMessage(message);
-    }
-
-    public void onUpButtonClicked(View view) {
-        String message = "8";
-        mBlue.SendMessage(message);
-    }
-
-    public void onRotLeftButtonClicked(View view) {
-        String message = "E";
-        mBlue.SendMessage(message);
-    }
-
-    public void onRotRightButtonClicked(View view) {
-        String message = "F";
-        mBlue.SendMessage(message);
-    }
 }

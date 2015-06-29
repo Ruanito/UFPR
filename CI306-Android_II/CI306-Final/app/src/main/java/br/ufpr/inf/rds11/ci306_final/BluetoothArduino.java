@@ -177,7 +177,8 @@ public class BluetoothArduino extends Thread {
     public String getLastMessage(){
         if(countMessages() == 0)
             return "";
-        return mMessages.get(countMessages()-1)+", "+mMessages.get(countMessages()-2)+", "+mMessages.get(countMessages()-3);
+
+        return mMessages.get(countMessages()-6)+", "+mMessages.get(countMessages()-5)+", "+mMessages.get(countMessages()-4)+", "+mMessages.get(countMessages()-3)+", "+mMessages.get(countMessages()-2)+", "+mMessages.get(countMessages()-1);
     }
 
     public void SendMessage(String msg){

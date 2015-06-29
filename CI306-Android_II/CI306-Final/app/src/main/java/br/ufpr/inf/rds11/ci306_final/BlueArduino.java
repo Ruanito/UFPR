@@ -8,12 +8,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 
 public class BlueArduino extends ActionBarActivity {
 
     private BluetoothArduino mBlue = null;
-    private EditText newMessage;
+    private TextView newMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +24,7 @@ public class BlueArduino extends ActionBarActivity {
         setContentView(R.layout.activity_blue_arduino);
 
         mBlue = BluetoothArduino.getInstance("linvor");
-        newMessage = (EditText) findViewById(R.id.newMessage);
+        newMessage = (TextView) findViewById(R.id.bluetextView);
 
         mBlue.Connect();
     }
@@ -51,7 +54,7 @@ public class BlueArduino extends ActionBarActivity {
     public void onSendMessageButtonClicked(View view) {
         String message = newMessage.getText().toString();
         mBlue.SendMessage(message);
-        mBlue.getLastMessage();
+        newMessage.setText(mBlue.getLastMessage());
         newMessage.setText(mBlue.getLastMessage());
     }
 }
