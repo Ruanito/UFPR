@@ -1,13 +1,11 @@
 package br.ufpr.inf.rds11.ci306_final;
 
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -76,7 +74,7 @@ public class Main extends ActionBarActivity {
     }
 
     public  void onLabirintoButtonClicked(View view) {
-        Intent intent = new Intent(this, Labirinto.class);
+        Intent intent = new Intent(this, Maze.class);
         startActivity(intent);
     }
 
