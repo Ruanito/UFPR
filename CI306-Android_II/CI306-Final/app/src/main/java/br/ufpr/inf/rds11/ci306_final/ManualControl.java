@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 /**
  * Created by Rogerio on 26/06/2015.
@@ -16,13 +17,19 @@ public class ManualControl extends ActionBarActivity {
 
     private BluetoothArduino mBlue = null;
 
+    private TextView sensorsTextView = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manual_control);
 
+        sensorsTextView = (TextView) findViewById(R.id.sensorsTextView);
+
         mBlue = BluetoothArduino.getInstance("linvor");
         mBlue.Connect();
+
+        run();
 
         ImageButton buttonUp = (ImageButton) findViewById(R.id.buttonUp);
         buttonUp.setOnTouchListener(new OnTouchListener() {
@@ -103,6 +110,17 @@ public class ManualControl extends ActionBarActivity {
             }
 
         });
+    }
+
+    public void run() {
+        while (true) {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            sensorsTextView.setText(mBlue.getLastMessage());
+        }
     }
 
 }
