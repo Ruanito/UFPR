@@ -100,6 +100,15 @@ public class Maze extends ActionBarActivity {
         }
     }
 
+    Ruanito
+            funcoes
+                ultrasom direito
+                ultrasom esquerdo
+                ultrasom frontal
+                        ambas retornam o valor do seu respectivo ultrasom
+                
+
+    Ruanito
     boolean canRight(){ //check whether it is possible to turn right
         if (ultrasom direito > 35){
             return true;
@@ -108,7 +117,7 @@ public class Maze extends ActionBarActivity {
         }
     }
 
-
+    Ruanito
     boolean canForward(){ //check whether it is possible to go forward
         if (ultrasom frontal > 35){
             return true;
@@ -117,6 +126,7 @@ public class Maze extends ActionBarActivity {
         }
     }
 
+    Ruanito
     boolean canLeft(){ //check whether it is possible to turn left
         if (ultrasom esquerdo > 35){
             return true;
@@ -239,6 +249,7 @@ public class Maze extends ActionBarActivity {
         }
     }
 
+    Ruanito
     //displacement functions
     void rotRight(){  //vira 90 graus a direita
         rotate_right();
@@ -246,17 +257,20 @@ public class Maze extends ActionBarActivity {
         parar();
     }
 
+    Ruanito
     void rotLeft(){ //vira 90 graus a esquerda
         rotate_left();
         delay(400);
         parar();
     }
 
+    Ruanito
     void rot180degrees(){ //vira 180 graus
         rotate_left();
         delay(800);
         parar();
     }
+
 
     void controlForward()
     {
@@ -312,6 +326,7 @@ public class Maze extends ActionBarActivity {
         delay(100);
     }
 
+    Ruanito
     //wall detector
     boolean LRWall(){ //detect left and right wall
         delay(100);
@@ -325,6 +340,7 @@ public class Maze extends ActionBarActivity {
         }
     }
 
+    Ruanito
     boolean lWall(){ //detect left wall
         delay(100);
         if (ultrasom esquerdo < 30){
@@ -343,6 +359,7 @@ public class Maze extends ActionBarActivity {
         }
     }
 
+    Ruanito
     boolean fWall(){ //detect front wall
         delay(100);
         if (ultrasom frontal < 30){
