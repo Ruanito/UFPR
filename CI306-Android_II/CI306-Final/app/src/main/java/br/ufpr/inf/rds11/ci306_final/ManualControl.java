@@ -114,6 +114,7 @@ public class ManualControl extends ActionBarActivity {
 
     public void run() {
         while (true) {
+            mBlue.SendMessage("5");
             try {
                 Thread.sleep(200);
             } catch (InterruptedException e) {
