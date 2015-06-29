@@ -4,6 +4,7 @@ import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +17,8 @@ import org.w3c.dom.Text;
 public class BlueArduino extends ActionBarActivity {
 
     private BluetoothArduino mBlue = null;
-    private TextView newMessage;
+    private TextView telaMessage;
+    private EditText newMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,9 @@ public class BlueArduino extends ActionBarActivity {
         setContentView(R.layout.activity_blue_arduino);
 
         mBlue = BluetoothArduino.getInstance("linvor");
-        newMessage = (TextView) findViewById(R.id.bluetextView);
+        newMessage = (EditText) findViewById(R.id.newMessage);
+        telaMessage = (TextView) findViewById(R.id.bluetextView);
+
 
         mBlue.Connect();
     }
@@ -54,7 +58,15 @@ public class BlueArduino extends ActionBarActivity {
     public void onSendMessageButtonClicked(View view) {
         String message = newMessage.getText().toString();
         mBlue.SendMessage(message);
-        newMessage.setText(mBlue.getLastMessage());
-        newMessage.setText(mBlue.getLastMessage());
+        Log.d("MSG", Integer.toString(mBlue.countMessages()));
+        try {
+            Thread.sleep(200);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.d("MSG", Integer.toString(mBlue.countMessages()));
+        Log.d("TELA", "mandando para tela");
+        telaMessage.setText(mBlue.getLastMessage());
+
     }
 }
