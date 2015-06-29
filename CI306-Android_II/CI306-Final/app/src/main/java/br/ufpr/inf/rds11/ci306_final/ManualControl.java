@@ -29,7 +29,7 @@ public class ManualControl extends ActionBarActivity {
         mBlue = BluetoothArduino.getInstance("linvor");
         mBlue.Connect();
 
-        run();
+
 
         ImageButton buttonUp = (ImageButton) findViewById(R.id.buttonUp);
         buttonUp.setOnTouchListener(new OnTouchListener() {
@@ -45,6 +45,7 @@ public class ManualControl extends ActionBarActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     String message = "0";
                     mBlue.SendMessage(message);
+                    run();
                 }
                 return true;
             }
@@ -59,12 +60,12 @@ public class ManualControl extends ActionBarActivity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     String message = "F";
                     mBlue.SendMessage(message);
-
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     String message = "0";
                     mBlue.SendMessage(message);
+                    run();
                 }
                 return true;
             }
@@ -85,6 +86,7 @@ public class ManualControl extends ActionBarActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     String message = "0";
                     mBlue.SendMessage(message);
+                    run();
                 }
                 return true;
             }
@@ -105,15 +107,18 @@ public class ManualControl extends ActionBarActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     String message = "0";
                     mBlue.SendMessage(message);
+                    run();
                 }
                 return true;
             }
 
         });
+
+
     }
 
     public void run() {
-        while (true) {
+
             mBlue.SendMessage("5");
             try {
                 Thread.sleep(200);
@@ -121,7 +126,7 @@ public class ManualControl extends ActionBarActivity {
                 e.printStackTrace();
             }
             sensorsTextView.setText(mBlue.getLastMessage());
-        }
+
     }
 
 }
