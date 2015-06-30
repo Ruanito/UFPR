@@ -8,12 +8,16 @@ import android.view.MenuItem;
 
 public class Maze extends ActionBarActivity {
 
-
+    private BluetoothArduino mBlue = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maze);
+
+        mBlue = BluetoothArduino.getInstance("linvor");
+
+        mBlue.Connect();
     }
 
     @Override
@@ -49,10 +53,10 @@ public class Maze extends ActionBarActivity {
         angle = 0;
 
 
-        while (nao parar){ //botão de parada na tela
+        while (nao stopWalking){ //botão de parada na tela
             delay(1000);
             if (canRight()){
-                rotRight(); 
+                rotRight();
                 controlForward();
                 newAngle(angle,90);
                 newPosition(line,column,angle);
@@ -62,7 +66,7 @@ public class Maze extends ActionBarActivity {
                 newPosition(line,column,angle);
                 leituraA = 0; leituraB  = 0;
             }else if(canLeft()){
-                rotLeft(); 
+                rotLeft();
                 controlForward();
                 newAngle(angle,-90);
                 newPosition(line,column,angle);
@@ -100,35 +104,57 @@ public class Maze extends ActionBarActivity {
         }
     }
 
-    Ruanito
-            funcoes
-                ultrasom direito
-                ultrasom esquerdo
-                ultrasom frontal
-                        ambas retornam o valor do seu respectivo ultrasom
-                
+    int ultrasomLeft () {
+        mBlue.SendMessage("5");
+        try {
+            Thread.sleep(200);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String left = mBlue.getMenssageSpacial(3);
+        return Integer.parseInt(left);
+    }
 
-    Ruanito
+    int ultrasomRight () {
+        mBlue.SendMessage("5");
+        try {
+            Thread.sleep(200);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String right = mBlue.getMenssageSpacial(5);
+        return Integer.parseInt(right);
+    }
+
+    int ultrasomFront () {
+        mBlue.SendMessage("5");
+        try {
+            Thread.sleep(200);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String front = mBlue.getMenssageSpacial(1);
+        return Integer.parseInt(front);
+    }
+
     boolean canRight(){ //check whether it is possible to turn right
-        if (ultrasom direito > 35){
+        if (ultrasomRight() > 35){
             return true;
         }else{
             return false;
         }
     }
 
-    Ruanito
     boolean canForward(){ //check whether it is possible to go forward
-        if (ultrasom frontal > 35){
+        if (ultrasomFront() > 35){
             return true;
         }else{
             return false;
         }
     }
 
-    Ruanito
     boolean canLeft(){ //check whether it is possible to turn left
-        if (ultrasom esquerdo > 35){
+        if (ultrasomLeft() > 35){
             return true;
         }else{
             return false;
@@ -138,9 +164,9 @@ public class Maze extends ActionBarActivity {
     //routes corrections
     void correctAngle(int &leituraA,int &leituraB,int &aPrev, int &bPrev){
         delay(100);
-        int a = ultrasom direito;
-        int b = ultrasom esquerdo;
-        int dist = ultrasom frontal;
+        int a = ultrasomRight() ;
+        int b = ultrasomLeft ();
+        int dist = ultrasomFront();
         int c;
         c = a+b;
 
@@ -149,40 +175,40 @@ public class Maze extends ActionBarActivity {
                 while (a < b){
                     rotate_left();
                     delay(30);
-                    parar();
+                    stopWalking();
                     delay(70);
-                    a = ultrasom direito;
+                    a = ultrasom Right ;
                     if (b > 24){
                         rotate_left();
                         delay(50);
-                        parar();
+                        stopWalking();
                         forward();
                         delay(70);
-                        parar();
+                        stopWalking();
                         return;
                     }
                     delay(100);
-                    b = ultrasom esquerdo;
+                    b = ultrasomLeft ();
                 }
             }else{
                 if (b < a){
                     while (b < a){
                         rotate_right();
                         delay(30);
-                        parar();
+                        stopWalking();
                         delay(70);
-                        b = ultrasom esquerdo;
+                        b = ultrasomLeft ();
                         if (a > 24){
                             rotate_right();
                             delay(50);
-                            parar();
+                            stopWalking();
                             forward();
                             delay(70);
-                            parar();
+                            stopWalking();
                             return;
                         }
                         delay(100);
-                        a = ultrasom direito;
+                        a = ultrasom Right ;
                     }
                 }
             }
@@ -192,7 +218,7 @@ public class Maze extends ActionBarActivity {
             if(lWall()){
                 if(leituraB == 0){
                     delay(100);
-                    bPrev = ultrasom esquerdo;
+                    bPrev = ultrasomLeft ();
                     leituraB = 1;
                 }
 
@@ -201,24 +227,24 @@ public class Maze extends ActionBarActivity {
                         while ( b > bPrev){
                             rotate_left();
                             delay(30);
-                            parar();
+                            stopWalking();
                             delay(70);
-                            b =  ultrasom esquerdo;
+                            b =  ultrasomLeft ();
                         }
                     }else if (b < bPrev){
                         while (b < bPrev){
                             rotate_right();
                             delay(30);
-                            parar();
+                            stopWalking();
                             delay(70);
-                            b =  ultrasom esquerdo;
+                            b =  ultrasomLeft ();
                         }
                     }
                 }
             }else if (rWall()){
                 if(leituraA == 0){
                     delay(100);
-                    aPrev = ultrasom direito;
+                    aPrev = ultrasom Right ;
                     leituraA = 1;
                 }
 
@@ -227,112 +253,128 @@ public class Maze extends ActionBarActivity {
                         while ( a > aPrev){
                             rotate_right();
                             delay(50);
-                            parar();
+                            stopWalking();
                             delay(70);
-                            a =  ultrasom direito;
+                            a =  ultrasom Right ;
                         }
                     }else if( a < aPrev){
                         while ( a < aPrev){
                             rotate_left();
                             delay(50);
-                            parar();
+                            stopWalking();
                             delay(70);
-                            a =  ultrasom direito;
+                            a =  ultrasom Right ;
                         }
                     }
                 }
             }else if (dist > 45){
                 forward();
                 delay(200);
-                parar();
+                stopWalking();
             }
         }
     }
 
-    Ruanito
-    //displacement functions
-    void rotRight(){  //vira 90 graus a direita
+    void rotate_right() {
+        mBlue.SendMessage("F");
+    }
+
+    void stopWalking() {
+        mBlue.SendMessage("0");
+    }
+
+    void rotate_left() {
+        mBlue.SendMessage("E");
+    }
+
+    void tornRight(){  //vira 90 graus a direita
         rotate_right();
-        delay(400);
-        parar();
+        try {
+            Thread.sleep(400);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        stopWalking();
     }
 
-    Ruanito
-    void rotLeft(){ //vira 90 graus a esquerda
+    void turnLeft(){ //vira 90 graus a esquerda
         rotate_left();
-        delay(400);
-        parar();
+        try {
+            Thread.sleep(400);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        stopWalking();
     }
 
-    Ruanito
     void rot180degrees(){ //vira 180 graus
         rotate_left();
-        delay(800);
-        parar();
+        try {
+            Thread.sleep(800);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        stopWalking();
     }
 
 
     void controlForward()
     {
         delay(100);
-        int dist = ultrasom frontal;
+        int dist = ultrasomFront();
         int pos;
         int x, xPrev;
         if ((dist < 230) && (dist > 180)){
             xPrev = 1;
 
             while(dist > 170){
-                correctAngle(leituraA,leituraB,aPrev,bPrev);
+                correctAngle(leituraA, leituraB, aPrev,bPrev);
                 forward();
                 delay(50);
-                parar();
+                stopWalking();
                 delay(50);
-                dist = ultrasom frontal;
+                dist = ultrasomFront();
             }
         } else if ((dist < 185) && (dist > 121)){
             xPrev = 2;
 
             while(dist > 116){
-                correctAngle(leituraA,leituraB,aPrev,bPrev);
+                correctAngle(leituraA, leituraB, aPrev,bPrev);
                 forward();
                 delay(50);
-                parar();
+                stopWalking();
                 delay(50);
-                dist = ultrasom frontal;
+                dist = ultrasomFront();
             }
         } else if ((dist < 121) && (dist > 63)){
             xPrev = 3;
 
             while(dist > 63){
-                correctAngle(leituraA,leituraB,aPrev,bPrev);
+                correctAngle(leituraA, leituraB, aPrev,bPrev);
                 forward();
                 delay(50);
-                parar();
+                stopWalking();
                 delay(50);
-                dist = ultrasom frontal;
+                dist = ultrasomFront();
             }
         } else if ((dist < 68) && (dist > 13)){
             xPrev = 4;
 
             while(dist > 13){
-                correctAngle(leituraA,leituraB,aPrev,bPrev);
+                correctAngle(leituraA, leituraB, aPrev,bPrev);
                 forward();
                 delay(50);
-                parar();
+                stopWalking();
                 delay(50);
-                dist = ultrasom frontal;
+                dist = ultrasomFront();
             }
         }
         delay(100);
     }
 
-    Ruanito
-    //wall detector
     boolean LRWall(){ //detect left and right wall
-        delay(100);
-        if (ultrasom esquerdo < 25){
-            delay(100);
-            if (ultrasom frontal < 25){
+        if (ultrasomLeft () < 25){
+            if (ultrasomFront() < 25){
                 return true;
             } else {
                 return false;
@@ -340,10 +382,8 @@ public class Maze extends ActionBarActivity {
         }
     }
 
-    Ruanito
     boolean lWall(){ //detect left wall
-        delay(100);
-        if (ultrasom esquerdo < 30){
+        if (ultrasomLeft () < 30){
             return true;
         } else {
             return false;
@@ -351,18 +391,15 @@ public class Maze extends ActionBarActivity {
     }
 
     boolean rWall(){ //detect right wall
-        delay(100);
-        if (ultrasom direito < 30){
+        if (ultrasomRight()  < 30){
             return true;
         } else {
             return false;
         }
     }
 
-    Ruanito
     boolean fWall(){ //detect front wall
-        delay(100);
-        if (ultrasom frontal < 30){
+        if (ultrasomFront() < 30){
             return true;
         } else {
             return false;

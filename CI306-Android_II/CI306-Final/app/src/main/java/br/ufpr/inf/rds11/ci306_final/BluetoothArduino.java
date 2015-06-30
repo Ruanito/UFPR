@@ -166,6 +166,10 @@ public class BluetoothArduino extends Thread {
         return mMessages.get(i);
     }
 
+    public String getMenssageSpacial(int i){
+        return mMessages.get(countMessages()-i);
+    }
+
     public void clearMessages(){
         mMessages.clear();
     }
