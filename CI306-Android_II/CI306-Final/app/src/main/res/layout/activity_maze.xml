@@ -11,15 +11,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PARAR LABIRINTO"
-        android:id="@+id/stopLabirinto"
+        android:id="@+id/stopMazeButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="41dp" />
+        android:layout_marginBottom="41dp"
+        android:onClick="onStopMazeButton"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="4444,44  4444,44 4444,44"
+        android:text="----  ---- ----"
         android:id="@+id/sensorsTextView"
         android:layout_marginTop="58dp"
         android:background="@android:color/background_dark"

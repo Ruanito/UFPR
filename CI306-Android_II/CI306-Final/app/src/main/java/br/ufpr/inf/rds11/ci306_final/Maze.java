@@ -4,11 +4,18 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 
 
 public class Maze extends ActionBarActivity {
 
     private BluetoothArduino mBlue = null;
+    private Button stopMazeButton = (Button) findViewById(R.id.stopMazeButton);
+    private boolean stopMaze = false;
+    private TextView sensorsTextView = (TextView) findViewById(R.id.sensorsTextView);
+    int left, front, right;
+    int line = 1, column = 1, angle = 0, leituraA = 0, leituraB = 0, aPrev, bPrev;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +25,8 @@ public class Maze extends ActionBarActivity {
         mBlue = BluetoothArduino.getInstance("linvor");
 
         mBlue.Connect();
+
+        startMaze();
     }
 
     @Override
@@ -42,21 +51,17 @@ public class Maze extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void onStopMazeButton(){
+        stopMaze = true;
+    }
 
-    int left, front, right;
-    int line, column, angle, leituraA = 0, leituraB = 0, aPrev, bPrev;
 
-    void loop()
+
+    public void startMaze()
     {
-        line = 1;
-        column = 1;
-        angle = 0;
-
-
-        while (nao stopWalking){ //botão de parada na tela
-            delay(1000);
+        while (!stopMaze){ //botão de parada na tela
             if (canRight()){
-                rotRight();
+                turnRight();
                 controlForward();
                 newAngle(angle,90);
                 newPosition(line,column,angle);
@@ -66,7 +71,7 @@ public class Maze extends ActionBarActivity {
                 newPosition(line,column,angle);
                 leituraA = 0; leituraB  = 0;
             }else if(canLeft()){
-                rotLeft();
+                turnLeft();
                 controlForward();
                 newAngle(angle,-90);
                 newPosition(line,column,angle);
@@ -78,12 +83,24 @@ public class Maze extends ActionBarActivity {
                 newPosition(line,column,angle);
                 leituraA = 0; leituraB  = 0;
             }
-            delay(1000);
+            showSensors();
         }
     }
-    //============================================end-loop============================================//
+
+    public void showSensors() {
+
+        mBlue.SendMessage("5");
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        sensorsTextView.setText(mBlue.getLastMessage());
+
+    }
+
 //position functions
-    int newAngle(int &angle, int action){ //set angle after movement
+    void newAngle(int angle, int action){ //set angle after movement
         angle = angle + action;
         if (angle >= 360){
             angle = angle - 360;
@@ -92,7 +109,7 @@ public class Maze extends ActionBarActivity {
         }
     }
 
-    int newPosition(int &line, int &column, int ang){ //set position xy after movement
+    void newPosition(int line, int column, int ang){ //set position xy after movement
         if (ang == 0){
             line += 1;
         }else if(ang == 90){
@@ -162,10 +179,10 @@ public class Maze extends ActionBarActivity {
     }
 
     //routes corrections
-    void correctAngle(int &leituraA,int &leituraB,int &aPrev, int &bPrev){
-        delay(100);
+    void correctAngle(int leituraA,int leituraB,int aPrev, int bPrev){
+        //delay(100);
         int a = ultrasomRight() ;
-        int b = ultrasomLeft ();
+        int b = ultrasomLeft();
         int dist = ultrasomFront();
         int c;
         c = a+b;
@@ -177,7 +194,7 @@ public class Maze extends ActionBarActivity {
                     delay(30);
                     stopWalking();
                     delay(70);
-                    a = ultrasom Right ;
+                    a = ultrasomRight();
                     if (b > 24){
                         rotate_left();
                         delay(50);
@@ -187,8 +204,8 @@ public class Maze extends ActionBarActivity {
                         stopWalking();
                         return;
                     }
-                    delay(100);
-                    b = ultrasomLeft ();
+                    //delay(100);
+                    b = ultrasomLeft();
                 }
             }else{
                 if (b < a){
@@ -207,8 +224,8 @@ public class Maze extends ActionBarActivity {
                             stopWalking();
                             return;
                         }
-                        delay(100);
-                        a = ultrasom Right ;
+                        //delay(100);
+                        a = ultrasomRight();
                     }
                 }
             }
@@ -217,7 +234,7 @@ public class Maze extends ActionBarActivity {
         else if (c > 40){
             if(lWall()){
                 if(leituraB == 0){
-                    delay(100);
+                    //delay(100);
                     bPrev = ultrasomLeft ();
                     leituraB = 1;
                 }
@@ -229,7 +246,7 @@ public class Maze extends ActionBarActivity {
                             delay(30);
                             stopWalking();
                             delay(70);
-                            b =  ultrasomLeft ();
+                            b =  ultrasomLeft();
                         }
                     }else if (b < bPrev){
                         while (b < bPrev){
@@ -244,7 +261,7 @@ public class Maze extends ActionBarActivity {
             }else if (rWall()){
                 if(leituraA == 0){
                     delay(100);
-                    aPrev = ultrasom Right ;
+                    aPrev = ultrasomRight();
                     leituraA = 1;
                 }
 
@@ -255,7 +272,7 @@ public class Maze extends ActionBarActivity {
                             delay(50);
                             stopWalking();
                             delay(70);
-                            a =  ultrasom Right ;
+                            a =  ultrasomRight();
                         }
                     }else if( a < aPrev){
                         while ( a < aPrev){
@@ -263,7 +280,7 @@ public class Maze extends ActionBarActivity {
                             delay(50);
                             stopWalking();
                             delay(70);
-                            a =  ultrasom Right ;
+                            a =  ultrasomRight();
                         }
                     }
                 }
@@ -274,6 +291,16 @@ public class Maze extends ActionBarActivity {
             }
         }
     }
+
+    void delay (int i) {
+        try {
+            Thread.sleep(i);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void forward() { mBlue.SendMessage("8"); }
 
     void rotate_right() {
         mBlue.SendMessage("F");
@@ -287,7 +314,7 @@ public class Maze extends ActionBarActivity {
         mBlue.SendMessage("E");
     }
 
-    void tornRight(){  //vira 90 graus a direita
+    void turnRight(){  //vira 90 graus a direita
         rotate_right();
         try {
             Thread.sleep(400);
@@ -320,7 +347,7 @@ public class Maze extends ActionBarActivity {
 
     void controlForward()
     {
-        delay(100);
+        //delay(100);
         int dist = ultrasomFront();
         int pos;
         int x, xPrev;
@@ -369,16 +396,14 @@ public class Maze extends ActionBarActivity {
                 dist = ultrasomFront();
             }
         }
-        delay(100);
+        //delay(100);
     }
 
     boolean LRWall(){ //detect left and right wall
-        if (ultrasomLeft () < 25){
-            if (ultrasomFront() < 25){
-                return true;
-            } else {
-                return false;
-            }
+        if (ultrasomFront() < 25){
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -405,7 +430,5 @@ public class Maze extends ActionBarActivity {
             return false;
         }
     }
-
-
 
 }

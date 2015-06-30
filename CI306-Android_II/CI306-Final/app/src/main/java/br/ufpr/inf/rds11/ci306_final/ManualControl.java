@@ -6,7 +6,6 @@ import android.view.MotionEvent;
 
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -45,7 +44,7 @@ public class ManualControl extends ActionBarActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     String message = "0";
                     mBlue.SendMessage(message);
-                    run();
+                    showSensors();
                 }
                 return true;
             }
@@ -65,7 +64,7 @@ public class ManualControl extends ActionBarActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     String message = "0";
                     mBlue.SendMessage(message);
-                    run();
+                    showSensors();
                 }
                 return true;
             }
@@ -86,7 +85,7 @@ public class ManualControl extends ActionBarActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     String message = "0";
                     mBlue.SendMessage(message);
-                    run();
+                    showSensors();
                 }
                 return true;
             }
@@ -107,7 +106,7 @@ public class ManualControl extends ActionBarActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     String message = "0";
                     mBlue.SendMessage(message);
-                    run();
+                    showSensors();
                 }
                 return true;
             }
@@ -117,7 +116,7 @@ public class ManualControl extends ActionBarActivity {
 
     }
 
-    public void run() {
+    public void showSensors() {
 
             mBlue.SendMessage("5");
             try {
