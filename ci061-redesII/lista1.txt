@@ -1,0 +1,63 @@
+1 - O que é um protocolo?
+	Protocolo - conjunto de regras
+2 - Quais as principais diferenças do modelo ISO/OSI para o modelo TCP/IP da Internet. Faça um paralelo das camadas de cada modelo. Mostre claramente a correspondência de camadas.
+	ISO/OSI - Modelo 7 camadas
+	Camada Física - Especifica a representação física de 1 bit no meio físico, incluindo conectores.
+	Camada de Enlace - Permite a transicaçõa de uma string de bits sobre um enlace, de forma confíavel e eficiente. Protocolos das redes locais também estão na camada de enlace.
+	Camada de Rede - Tem como função principal o reteamento.
+	Camada de Transporte - Faz a comunicaçõa eficiente e confiável ponto-a-ponto sobre a rede de interface entre o "host" e a rede.
+	Camada de Sessão - Dialoga entre as maquinas.
+	Camada de Apresentação dos Dados - Permite a especificação sintática.
+	Camada de Aplicação - Protocolo de aplicação, não o aplicativo.
+	TCP/IP
+	Aplicação
+	Transporte
+	Rede
+	Pseudo Camada: Host -> Rede
+3 - Por que as redes locais necessitam de um protocolo de Controle de Acesso ao Meio (MAC)?
+	O IP não é um identificador de máquina, e sim de uma máquina com uma rede específica. O MAC é um identificador necessário organizar as redes em um contexto local através de da camada de enlace, e o IP server para obtenção do endereço MAC das máquinas através do protocolo ARP.
+4 - Explique o funcionamento do protocolo de Controle de Acesso ao Meio da Ethernet, o CSMA/CD
+	É um sistema de transmisão com com detenção de colisão. Meio livre, trasmite com 100% de probalidade.
+	Se um pacote trasmitido colide. A máquina espera 0 ou 1 intervalo de tempo para retransmitir. Após a segunda colisão a máquina espera 0,1,2 ou 3 intervalos para retransmitir. Após i-colisão, espera 0..2^i-1 sendo i <= 10, de 10 até 16 colisão: 0.1023 intervalos, Após 16, desiste(network error).
+6 - Compare o desempenho da rede Ethernet com o da rede Token Ring, considerando as mesmas taxas de transmissão para as duas redes, e situações de alto e baixo tráfego na rede.
+	Carga Alta
+		Token ring é melhor, divide a rede igualmente.
+		Ethernet: aumenta as colições.
+	Carga Baixa
+		Ethernet é melhor, quem precisa transmitir, transmite.
+		Token Ring: perde tempo trafegando token.
+9 - Qual o formato do endereço IP versão 4? Quais classes foram definidas para este endereço? 
+	O formato do IP versão é decimal.
+	Classes
+		Classe A, Classe B, Classe C, Classe D e Classe E.
+10 - Explique o funcionamento dos protocolos ARP e RARP.
+	Protocolo ARP - Antes de comunicar na rede física é necessário traduzir o endereço IP para o endereço físico correspondente. Supondo que a máquina A deseja se comunicar com a máquina Z, é só conhecer o IPz. Manda uma requisição ARP por broadcast IPz, Fz? Além disso já informa o IPa Fa. Todas as máquinas da rede recebem a requisição e atualizam seu par de endereços IPa Fa. Todas as maquinas da rede recebem a requisisãpo e atualizam localmente os pares de endereços A e Z. A tabela ARP é uma tabela cache que armazena os pares de endereço conhecidos. É um protocolo que depende da tecnologia.
+	Procolo RARP - Pense em um host diskless, ao ser desligado perde endereço IP. Portanto, ao ser ligado precisa comunicar para obter o endereço IP. A requisição RARP é transmitida por broadcast. Todas maquinas escutam, inclusive o servidor, acessa uma tabela estatíca obtem o endereço IP correspondente. Resporta por broadcast.
+13 - Explique como funciona uma Proxy ARP. Em termos de administração de rede, qual a diferença de usar Proxy ARP e subredes? 
+	Proxy ARP - Permite mapear 1 único net_id para 2 ou mais redes físicas. Dá a ilusão que todas as máquinas estão em 1 rede física. Todos os pacotes entre deses subsequentes são recebidos pela proxy arp e reencaminhado adequadamente.
+	Subredes permite administração descentralizada das redes internas e o proxy ARP é uma administração unificada.
+14 - O CIDR permitiu que a versão 4 do protocolo IP pudesse continuar a funcionar na maior parte da Internet. Quais foram os problemas que esta abordagem de endereçamento resolveu? Como é a solução CIDR? 
+	Propuseram reorganizar os muitos endereços classe C disponíveis. O net_id tes de 13 a 27 bits como os endereços, tem 32 bits, 19 a 5 bits para host_id. Um prefixo CIDR informa o número de bits do net_id Ex.: 200.17.212.179/25
+15 - O formato dos dados em uma rede pode seguir um de dois padrões: Little Endian e Big Endian. Explique seu funcionamento. Qual dos dois é adotado pela Internet?
+	Little endian - A partir do byte menos significativo.
+	Big endian - A partir do byte mais significativo.
+	A internet é big endian.
+16 - Um protocolo pode oferecer um serviço confiável, orientado à conexão, ou não confiável, não orientado a conexão. O que estas características significam em termos práticos?
+	Não confiável - Não existe garantia de entrega de pacotes. não há confirmações de recebimento (ACK).
+	Não orientado a conexão - Pacotes chagam embaralhados no destino.
+	Confiável - Confirmação do recebimento - ACK.
+	Orientado a concexão - Pacotes chegam na ordem no destino.
+18 - Já que o protocolo IP não tem confirmações de recebimento, por que os datagramas tem identificadores?
+	Porque o IP suporta fragmentação. O identificador serve para que o fragmentos de um mesmo pacote possam ser remontados no destinatário.
+19 - Explique como são calculados os campos TTL (Time To Live) e checksum do header IP.
+	TTL começa com um valor grande suficiente.
+	Ao chegar em um roteador ele faze TTL <- TTl -1
+	Se TTL = 0 então descarta o pacote
+	Checksum - A trata o header como uma palavra de 16 bits. Soma usando complemento de 1 e tira o complemento do resultado. Destinatario calcula inclisice com checksum, se o resultado = zero, ok, senão há erro.
+20 - Por que é necessário fragmentar um pacote IP? Explique onde e como um pacote fragmentado é recontituído.
+	Quando o pacote IP é maior que o limite da rede Física MTU. Os pacotes é recontituido ocorre só no destinatário.	
+28 - Explique o processo de abertura de conexão TCP. Um famoso ataque da Internet, o TCP-SYN-Flooding é baseado neste processo. Como é feito este ataque? Lembre-se o administrador de uma rede deve conhecer os ataques para saber evitá-los! 
+	Para estabeler conexão com o processo B, o processo A envia um segmento TCP, com flag SYN ligado, e um número de sequência. O processo B confirma enviando para a o ACK = X+1. Um número aleatório inicial para sequẽncia de bytes de dados e o flag SYN ligado. Por fim o A confirma ACK = Y+1 e incremente seq = X+1. O SYN-Flooding consiste em enviar uma grande quantidade de requisições SYN para um servidor, mas não responder o SYN-ACK correspondente à elas. Isso gera uma sobrecarga no servidor para a espera de ACKs de clientes, podendo comprometer recursos no servidor.
+29 - O TCP oferece serviço de entrega de fluxo confiável de bytes da origem ao destino. Ele usa confirmações de entrega, junto ao controle de fluxo. Para que serve o controle de fluxo do TCP?
+	Para que as mensagens não sejam enviadas em uma taxa maior que o destinatário possa receber.
+30 - Quando roteadores recebem uma quantiade maior de pacotes que ele pode transmitir. Quando ocorre cogestionamento o roteador começa a jogar pacotes fora.
